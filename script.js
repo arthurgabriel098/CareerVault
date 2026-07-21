@@ -1,4 +1,3 @@
-
 const newCareerButton = document.getElementById("new-career-button");
 const careerForm = document.getElementById("career-form");
 const createCareerButton = document.getElementById("create-career-button");
@@ -6,6 +5,10 @@ const createCareerButton = document.getElementById("create-career-button");
 const clubName = document.getElementById("club-name");
 const season = document.getElementById("season");
 const manager = document.getElementById("manager");
+const country = document.getElementById("country");
+const titles = document.getElementById("titles");
+const budget = document.getElementById("budget");
+const clubLogo = document.getElementById("club-logo");
 
 const careersContainer = document.getElementById("careers-container");
 const careerDetails = document.getElementById("career-details");
@@ -18,26 +21,22 @@ const backButton = document.getElementById("back-button");
 
 const transfersButton = document.getElementById("transfers-button");
 const transfersSection = document.getElementById("transfers-section");
-
 const addTransferButton = document.getElementById("add-transfer-button");
 
 const playerName = document.getElementById("player-name");
 const playerPosition = document.getElementById("player-position");
 const previousClub = document.getElementById("previous-club");
 const transferValue = document.getElementById("transfer-value");
-
 const transfersList = document.getElementById("transfers-list");
 
 const salesButton = document.getElementById("sales-button");
 const salesSection = document.getElementById("sales-section");
-
 const addSaleButton = document.getElementById("add-sale-button");
 
 const soldPlayerName = document.getElementById("sold-player-name");
 const soldPlayerPosition = document.getElementById("sold-player-position");
 const newClub = document.getElementById("new-club");
 const saleValue = document.getElementById("sale-value");
-
 const salesList = document.getElementById("sales-list");
 
 const overviewButton = document.getElementById("overview-button");
@@ -49,186 +48,216 @@ const transferBalance = document.getElementById("transfer-balance");
 
 const squadButton = document.getElementById("squad-button");
 const squadSection = document.getElementById("squad-section");
+const addSquadPlayerButton = document.getElementById("add-squad-player-button");
 
-const addSquadPlayerButton =
-    document.getElementById("add-squad-player-button");
+const squadPlayerName = document.getElementById("squad-player-name");
+const squadPlayerPosition = document.getElementById("squad-player-position");
+const squadPlayerNumber = document.getElementById("squad-player-number");
+const squadPlayerOverall = document.getElementById("squad-player-overall");
+const squadList = document.getElementById("squad-list");
 
-const squadPlayerName =
-    document.getElementById("squad-player-name");
+const statsButton = document.getElementById("stats-button");
+const statsSection = document.getElementById("stats-section");
+const saveStatsButton = document.getElementById("save-stats-button");
 
-const squadPlayerPosition =
-    document.getElementById("squad-player-position");
+const statsTitles = document.getElementById("stats-titles");
+const statsPoints = document.getElementById("stats-points");
+const statsTopScorer = document.getElementById("stats-top-scorer");
+const statsTopScorerGoals = document.getElementById("stats-top-scorer-goals");
+const statsBestCampaign = document.getElementById("stats-best-campaign");
+const statsHighestPosition = document.getElementById("stats-highest-position");
 
-const squadPlayerNumber =
-    document.getElementById("squad-player-number");
+const displayTitles = document.getElementById("display-titles");
+const displayPoints = document.getElementById("display-points");
+const displayTopScorer = document.getElementById("display-top-scorer");
+const displayTopScorerGoals = document.getElementById("display-top-scorer-goals");
+const displayBestCampaign = document.getElementById("display-best-campaign");
+const displayHighestPosition = document.getElementById("display-highest-position");
 
-const squadPlayerOverall =
-    document.getElementById("squad-player-overall");
+const newSeasonButton = document.getElementById("new-season-button");
 
-const squadList =
-    document.getElementById("squad-list");
-
-
-const statsButton =
-    document.getElementById("stats-button");
-
-const statsSection =
-    document.getElementById("stats-section");
-
-const saveStatsButton =
-    document.getElementById("save-stats-button");
-
-const statsTitles =
-    document.getElementById("stats-titles");
-
-const statsPoints =
-    document.getElementById("stats-points");
-
-const statsTopScorer =
-    document.getElementById("stats-top-scorer");
-
-const statsTopScorerGoals =
-    document.getElementById("stats-top-scorer-goals");
-
-const statsBestCampaign =
-    document.getElementById("stats-best-campaign");
-
-const statsHighestPosition =
-    document.getElementById("stats-highest-position");
-
-
-const displayTitles =
-    document.getElementById("display-titles");
-
-const displayPoints =
-    document.getElementById("display-points");
-
-const displayTopScorer =
-    document.getElementById("display-top-scorer");
-
-const displayTopScorerGoals =
-    document.getElementById("display-top-scorer-goals");
-
-const displayBestCampaign =
-    document.getElementById("display-best-campaign");
-
-const displayHighestPosition =
-    document.getElementById("display-highest-position");
-
+const historyButton = document.getElementById("history-button");
+const historySection = document.getElementById("history-section");
+const historyList = document.getElementById("history-list");
 
 let totalTransfers = 0;
 let totalSales = 0;
-
-
+let initialBudget = 0;
 let carreiraAtual = null;
 
-// NOVA CARREIRA
 
-newCareerButton.addEventListener("click", function() {
+// ========================================
+// HISTÓRICO COMEÇA OCULTO
+// ========================================
+
+historySection.style.display = "none";
+
+
+// ========================================
+// NOVA CARREIRA
+// ========================================
+
+newCareerButton.addEventListener("click", function () {
 
     careerForm.style.display = "flex";
+
+    careersContainer.style.display = "none";
+
+    careerDetails.style.display = "none";
 
 });
 
 
+// ========================================
 // CRIAR CARREIRA
+// ========================================
 
-createCareerButton.addEventListener("click", function() {
-carreiraAtual = {
-    clube: clubName.value,
-    temporada: season.value,
-    tecnico: manager.value,
-    contratacoes: [],
-    vendas: [],
-    elenco: [],
-    estatisticas: {},
-    historico: []
-};
+createCareerButton.addEventListener("click", function () {
+
+    const nomeClube = clubName.value.trim();
+    const temporadaInicial = season.value.trim();
+    const nomeTecnico = manager.value.trim();
+    const pais = country.value.trim();
+    const titulosIniciais = titles.value.trim();
+    const orcamentoInicial = Number(budget.value) || 0;
+    const logo = clubLogo.value.trim();
+
+
+    if (
+        nomeClube === "" ||
+        temporadaInicial === "" ||
+        nomeTecnico === ""
+    ) {
+
+        alert("Preencha o clube, a temporada e o técnico!");
+
+        return;
+
+    }
+
+
     const newCareer = document.createElement("article");
 
-    newCareer.classList.add("career-card");
+    newCareer.className = "career-card";
 
 
-    const newClubName = document.createElement("h3");
+    if (logo !== "") {
 
-    newClubName.textContent = clubName.value;
+        const logoElement = document.createElement("img");
 
+        logoElement.src = logo;
 
-    const newSeason = document.createElement("p");
+        logoElement.alt = "Escudo do " + nomeClube;
 
-    newSeason.textContent =
-        "Temporada: " + season.value;
+        logoElement.className = "career-logo";
 
+        newCareer.appendChild(logoElement);
 
-    const newManager = document.createElement("p");
-
-    newManager.textContent =
-        "Técnico: " + manager.value;
+    }
 
 
-    const viewCareerButton =
-        document.createElement("button");
+    const clubTitle = document.createElement("h3");
 
-    viewCareerButton.textContent =
-        "Ver Carreira";
-
-    viewCareerButton.classList.add(
-        "view-career-button"
-    );
+    clubTitle.textContent = nomeClube;
 
 
-    newCareer.appendChild(newClubName);
+    const seasonText = document.createElement("p");
 
-    newCareer.appendChild(newSeason);
+    seasonText.textContent = "Temporada: " + temporadaInicial;
 
-    newCareer.appendChild(newManager);
 
-    newCareer.appendChild(viewCareerButton);
+    const managerText = document.createElement("p");
 
-    const removeCareerButton =
-    document.createElement("button");
+    managerText.textContent = "Técnico: " + nomeTecnico;
 
-removeCareerButton.textContent =
-    "Remover";
 
-removeCareerButton.classList.add(
-    "remove-career-button"
-);
+    const countryText = document.createElement("p");
 
-newCareer.appendChild(
-    removeCareerButton
-);
+    countryText.textContent = "País: " + (pais || "-");
+
+
+    const viewButton = document.createElement("button");
+
+    viewButton.textContent = "Ver Carreira";
+
+    viewButton.className = "view-career-button";
+
+
+    const removeButton = document.createElement("button");
+
+    removeButton.textContent = "Remover";
+
+    removeButton.className = "remove-career-button";
+
+
+    newCareer.appendChild(clubTitle);
+
+    newCareer.appendChild(seasonText);
+
+    newCareer.appendChild(managerText);
+
+    newCareer.appendChild(countryText);
+
+    newCareer.appendChild(viewButton);
+
+    newCareer.appendChild(removeButton);
+
 
     careersContainer.appendChild(newCareer);
 
 
-salvarCarreiras();
-    viewCareerButton.addEventListener(
-        "click",
-        function() {
-
-            careersContainer.style.display =
-                "none";
-
-            careerDetails.style.display =
-                "block";
-
-
-            detailsClubName.textContent =
-                newClubName.textContent;
-
-            detailsSeason.textContent =
-                newSeason.textContent;
-
-            detailsManager.textContent =
-                newManager.textContent;
-
-        }
+    localStorage.setItem(
+        "orcamento_" + nomeClube,
+        orcamentoInicial
     );
 
 
-    careerForm.style.display =
-        "none";
+    localStorage.setItem(
+        "titulos_" + nomeClube,
+        titulosIniciais || "0"
+    );
+
+
+    viewButton.addEventListener("click", function () {
+
+        abrirCarreira(newCareer);
+
+    });
+
+
+    removeButton.addEventListener("click", function () {
+
+        const confirmou = confirm(
+            "Tem certeza que deseja remover esta carreira?"
+        );
+
+
+        if (confirmou) {
+
+            newCareer.remove();
+
+            localStorage.removeItem(
+                "dados_" + nomeClube
+            );
+
+            localStorage.removeItem(
+                "orcamento_" + nomeClube
+            );
+
+            localStorage.removeItem(
+                "titulos_" + nomeClube
+            );
+
+            salvarCarreiras();
+
+        }
+
+    });
+
+
+    careerForm.style.display = "none";
+
+    careersContainer.style.display = "grid";
 
 
     clubName.value = "";
@@ -237,27 +266,83 @@ salvarCarreiras();
 
     manager.value = "";
 
+    country.value = "";
+
+    titles.value = "";
+
+    budget.value = "";
+
+    clubLogo.value = "";
+
+
+    salvarCarreiras();
+
 });
 
 
+// ========================================
+// ABRIR CARREIRA
+// ========================================
+
+function abrirCarreira(careerCard) {
+
+    carreiraAtual = careerCard;
+
+
+    const nome = careerCard.querySelector("h3");
+
+    const temporada = careerCard.querySelectorAll("p")[0];
+
+    const tecnico = careerCard.querySelectorAll("p")[1];
+
+
+    detailsClubName.textContent = nome.textContent;
+
+    detailsSeason.textContent = temporada.textContent;
+
+    detailsManager.textContent = tecnico.textContent;
+
+
+    careersContainer.style.display = "none";
+
+    careerForm.style.display = "none";
+
+    careerDetails.style.display = "block";
+
+
+    historySection.style.display = "none";
+
+
+    carregarDadosDaCarreira();
+
+}
+
+
+// ========================================
 // VOLTAR
+// ========================================
 
-backButton.addEventListener("click", function() {
-  salvarDadosDaCarreira();
+backButton.addEventListener("click", function () {
+
+    salvarDadosDaCarreira();
+
+    salvarCarreiras();
 
 
-    careerDetails.style.display =
-        "none";
+    careerDetails.style.display = "none";
 
-    careersContainer.style.display =
-        "grid";
+    careerForm.style.display = "none";
+
+    careersContainer.style.display = "grid";
 
 });
 
 
-// CONTRATAÇÕES
+// ========================================
+// NAVEGAÇÃO
+// ========================================
 
-transfersButton.addEventListener("click", function() {
+transfersButton.addEventListener("click", function () {
 
     transfersSection.scrollIntoView({
         behavior: "smooth"
@@ -266,82 +351,124 @@ transfersButton.addEventListener("click", function() {
 });
 
 
-addTransferButton.addEventListener("click", function() {
+salesButton.addEventListener("click", function () {
 
-    const newTransfer =
-        document.createElement("div");
+    salesSection.scrollIntoView({
+        behavior: "smooth"
+    });
 
-    newTransfer.classList.add(
-        "transfer-card"
-    );
-
-
-    const transferPlayer =
-        document.createElement("h3");
-
-    transferPlayer.textContent =
-        playerName.value;
+});
 
 
-    const transferPosition =
-        document.createElement("p");
+overviewButton.addEventListener("click", function () {
 
-    transferPosition.textContent =
-        "Posição: " +
-        playerPosition.value;
+    overviewSection.scrollIntoView({
+        behavior: "smooth"
+    });
 
-
-    const transferPreviousClub =
-        document.createElement("p");
-
-    transferPreviousClub.textContent =
-        "Clube anterior: " +
-        previousClub.value;
+});
 
 
-    const transferPrice =
-        document.createElement("p");
+squadButton.addEventListener("click", function () {
 
-    transferPrice.textContent =
+    squadSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+
+statsButton.addEventListener("click", function () {
+
+    statsSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+
+// ========================================
+// MOSTRAR / OCULTAR HISTÓRICO
+// ========================================
+
+historyButton.addEventListener("click", function () {
+
+    if (historySection.style.display === "none") {
+
+        historySection.style.display = "block";
+
+        historySection.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    } else {
+
+        historySection.style.display = "none";
+
+    }
+
+});
+
+
+// ========================================
+// CONTRATAÇÕES
+// ========================================
+
+addTransferButton.addEventListener("click", function () {
+
+    if (playerName.value.trim() === "") {
+
+        alert("Digite o nome do jogador!");
+
+        return;
+
+    }
+
+
+    const newTransfer = document.createElement("div");
+
+    newTransfer.className = "transfer-card";
+
+
+    const name = document.createElement("h3");
+
+    name.textContent = playerName.value;
+
+
+    const position = document.createElement("p");
+
+    position.textContent = "Posição: " + playerPosition.value;
+
+
+    const club = document.createElement("p");
+
+    club.textContent = "Clube anterior: " + previousClub.value;
+
+
+    const value = document.createElement("p");
+
+    value.textContent =
         "Valor: €" +
-        transferValue.value +
+        (transferValue.value || 0) +
         "M";
 
 
-    newTransfer.appendChild(
-        transferPlayer
-    );
+    newTransfer.appendChild(name);
 
-    newTransfer.appendChild(
-        transferPosition
-    );
+    newTransfer.appendChild(position);
 
-    newTransfer.appendChild(
-        transferPreviousClub
-    );
+    newTransfer.appendChild(club);
 
-    newTransfer.appendChild(
-        transferPrice
-    );
+    newTransfer.appendChild(value);
 
 
-    transfersList.appendChild(
-        newTransfer
-    );
+    transfersList.appendChild(newTransfer);
 
 
-    transfersCount.textContent =
-        transfersList.children.length;
+    totalTransfers += Number(transferValue.value) || 0;
 
 
-    totalTransfers +=
-        Number(transferValue.value);
-
-
-    transferBalance.textContent =
-        "€" +
-        (totalSales - totalTransfers) +
-        "M";
+    atualizarTransferencias();
 
 
     playerName.value = "";
@@ -352,96 +479,75 @@ addTransferButton.addEventListener("click", function() {
 
     transferValue.value = "";
 
+
+    salvarDadosDaCarreira();
+
 });
 
 
+// ========================================
 // VENDAS
+// ========================================
 
-salesButton.addEventListener("click", function() {
+addSaleButton.addEventListener("click", function () {
 
-    salesSection.scrollIntoView({
-        behavior: "smooth"
-    });
+    if (soldPlayerName.value.trim() === "") {
 
-});
+        alert("Digite o nome do jogador!");
 
+        return;
 
-addSaleButton.addEventListener("click", function() {
-
-    const newSale =
-        document.createElement("div");
-
-    newSale.classList.add(
-        "transfer-card"
-    );
+    }
 
 
-    const salePlayer =
-        document.createElement("h3");
+    const newSale = document.createElement("div");
 
-    salePlayer.textContent =
-        soldPlayerName.value;
+    newSale.className = "transfer-card";
 
 
-    const salePosition =
-        document.createElement("p");
+    const name = document.createElement("h3");
 
-    salePosition.textContent =
+    name.textContent = soldPlayerName.value;
+
+
+    const position = document.createElement("p");
+
+    position.textContent =
         "Posição: " +
         soldPlayerPosition.value;
 
 
-    const saleNewClub =
-        document.createElement("p");
+    const club = document.createElement("p");
 
-    saleNewClub.textContent =
+    club.textContent =
         "Novo clube: " +
         newClub.value;
 
 
-    const salePrice =
-        document.createElement("p");
+    const value = document.createElement("p");
 
-    salePrice.textContent =
+    value.textContent =
         "Valor: €" +
-        saleValue.value +
+        (saleValue.value || 0) +
         "M";
 
 
-    newSale.appendChild(
-        salePlayer
-    );
+    newSale.appendChild(name);
 
-    newSale.appendChild(
-        salePosition
-    );
+    newSale.appendChild(position);
 
-    newSale.appendChild(
-        saleNewClub
-    );
+    newSale.appendChild(club);
 
-    newSale.appendChild(
-        salePrice
-    );
+    newSale.appendChild(value);
 
 
-    salesList.appendChild(
-        newSale
-    );
+    salesList.appendChild(newSale);
 
 
-    salesCount.textContent =
-        salesList.children.length;
+    totalSales += Number(saleValue.value) || 0;
 
 
-    totalSales +=
-        Number(saleValue.value);
-
-
-    transferBalance.textContent =
-        "€" +
-        (totalSales - totalTransfers) +
-        "M";
+    atualizarTransferencias();
 
 
     soldPlayerName.value = "";
@@ -452,182 +558,261 @@ addSaleButton.addEventListener("click", function() {
 
     saleValue.value = "";
 
-});
 
-
-// VISÃO GERAL
-
-overviewButton.addEventListener("click", function() {
-
-    overviewSection.scrollIntoView({
-        behavior: "smooth"
-    });
+    salvarDadosDaCarreira();
 
 });
 
 
+// ========================================
+// SALDO
+// ========================================
+
+function atualizarTransferencias() {
+
+    transfersCount.textContent =
+        transfersList.children.length;
+
+
+    salesCount.textContent =
+        salesList.children.length;
+
+
+    const saldo =
+        initialBudget +
+        totalSales -
+        totalTransfers;
+
+
+    transferBalance.textContent =
+        "€" + saldo + "M";
+
+}
+
+
+// ========================================
 // ELENCO
+// ========================================
 
-squadButton.addEventListener("click", function() {
+addSquadPlayerButton.addEventListener("click", function () {
 
-    squadSection.scrollIntoView({
-        behavior: "smooth"
-    });
+    if (squadPlayerName.value.trim() === "") {
 
-});
+        alert("Digite o nome do jogador!");
 
-
-addSquadPlayerButton.addEventListener(
-    "click",
-    function() {
-
-        const newPlayer =
-            document.createElement("div");
-
-        newPlayer.classList.add(
-            "transfer-card"
-        );
-
-
-        const player =
-            document.createElement("h3");
-
-        player.textContent =
-            squadPlayerName.value;
-
-
-        const position =
-            document.createElement("p");
-
-        position.textContent =
-            "Posição: " +
-            squadPlayerPosition.value;
-
-
-        const number =
-            document.createElement("p");
-
-        number.textContent =
-            "Camisa: " +
-            squadPlayerNumber.value;
-
-
-        const overall =
-            document.createElement("p");
-
-        overall.textContent =
-            "Overall: " +
-            squadPlayerOverall.value;
-
-
-        newPlayer.appendChild(player);
-
-        newPlayer.appendChild(position);
-
-        newPlayer.appendChild(number);
-
-        newPlayer.appendChild(overall);
-
-
-        squadList.appendChild(newPlayer);
-
-
-        squadPlayerName.value = "";
-
-        squadPlayerPosition.value = "";
-
-        squadPlayerNumber.value = "";
-
-        squadPlayerOverall.value = "";
+        return;
 
     }
-);
 
 
-// ESTATÍSTICAS
+    const newPlayer = document.createElement("div");
 
-statsButton.addEventListener("click", function() {
+    newPlayer.className = "transfer-card";
 
-    statsSection.scrollIntoView({
-        behavior: "smooth"
-    });
+
+    const name = document.createElement("h3");
+
+    name.textContent = squadPlayerName.value;
+
+
+    const position = document.createElement("p");
+
+    position.textContent =
+        "Posição: " +
+        squadPlayerPosition.value;
+
+
+    const number = document.createElement("p");
+
+    number.textContent =
+        "Camisa: " +
+        squadPlayerNumber.value;
+
+
+    const overall = document.createElement("p");
+
+    overall.textContent =
+        "Overall: " +
+        squadPlayerOverall.value;
+
+
+    newPlayer.appendChild(name);
+
+    newPlayer.appendChild(position);
+
+    newPlayer.appendChild(number);
+
+    newPlayer.appendChild(overall);
+
+
+    squadList.appendChild(newPlayer);
+
+
+    squadPlayerName.value = "";
+
+    squadPlayerPosition.value = "";
+
+    squadPlayerNumber.value = "";
+
+    squadPlayerOverall.value = "";
+
+
+    salvarDadosDaCarreira();
 
 });
 
 
-saveStatsButton.addEventListener("click", function() {
+// ========================================
+// ESTATÍSTICAS
+// ========================================
+
+saveStatsButton.addEventListener("click", function () {
 
     displayTitles.textContent =
-        statsTitles.value;
+        statsTitles.value || "0";
+
 
     displayPoints.textContent =
-        statsPoints.value;
+        statsPoints.value || "0";
+
 
     displayTopScorer.textContent =
-        statsTopScorer.value;
+        statsTopScorer.value || "-";
+
 
     displayTopScorerGoals.textContent =
-        statsTopScorerGoals.value +
+        (statsTopScorerGoals.value || "0") +
         " gols";
 
+
     displayBestCampaign.textContent =
-        statsBestCampaign.value;
+        statsBestCampaign.value || "-";
+
 
     displayHighestPosition.textContent =
-        statsHighestPosition.value;
+        statsHighestPosition.value || "-";
 
 
-    statsTitles.value = "";
-
-    statsPoints.value = "";
-
-    statsTopScorer.value = "";
-
-    statsTopScorerGoals.value = "";
-
-    statsBestCampaign.value = "";
-
-    statsHighestPosition.value = "";
+    salvarDadosDaCarreira();
 
 });
-const newSeasonButton =
-    document.getElementById("new-season-button");
 
 
-newSeasonButton.addEventListener("click", function() {
+// ========================================
+// NOVA TEMPORADA
+// ========================================
 
-    const currentSeason =
+newSeasonButton.addEventListener("click", function () {
+
+    if (!carreiraAtual) {
+
+        return;
+
+    }
+
+
+    const confirmou = confirm(
+        "Deseja encerrar esta temporada e começar uma nova?"
+    );
+
+
+    if (!confirmou) {
+
+        return;
+
+    }
+
+
+    const temporadaAtual =
         detailsSeason.textContent.replace(
             "Temporada: ",
             ""
         );
 
 
-    const seasonParts =
-        currentSeason.split("/");
+    const partes = temporadaAtual.split("/");
 
 
-    const firstYear =
-        Number(seasonParts[0]);
+    if (partes.length !== 2) {
+
+        alert("Use o formato 2025/26");
+
+        return;
+
+    }
 
 
-    const newFirstYear =
-        firstYear + 1;
+    const anoInicial = Number(partes[0]);
+
+    const anoFinal = Number(partes[1]);
 
 
-    const newSecondYear =
-        newFirstYear + 1;
+    if (
+        isNaN(anoInicial) ||
+        isNaN(anoFinal)
+    ) {
+
+        alert("Temporada inválida.");
+
+        return;
+
+    }
 
 
-    const newSeason =
-        newFirstYear +
+    const oldSeason = document.createElement("div");
+
+    oldSeason.className = "history-card";
+
+
+    oldSeason.innerHTML =
+        "<h3>" +
+        detailsSeason.textContent +
+        "</h3>" +
+
+        "<p>🏆 Títulos: " +
+        displayTitles.textContent +
+        "</p>" +
+
+        "<p>📊 Pontos: " +
+        displayPoints.textContent +
+        "</p>" +
+
+        "<p>⚽ Artilheiro: " +
+        displayTopScorer.textContent +
+        " - " +
+        displayTopScorerGoals.textContent +
+        "</p>" +
+
+        "<p>📈 Melhor campanha: " +
+        displayBestCampaign.textContent +
+        "</p>" +
+
+        "<p>🥇 Melhor posição: " +
+        displayHighestPosition.textContent +
+        "</p>";
+
+
+    historyList.appendChild(oldSeason);
+
+
+    const novaTemporada =
+        (anoInicial + 1) +
         "/" +
-        String(newSecondYear).slice(-2);
+        (anoFinal + 1);
 
 
     detailsSeason.textContent =
         "Temporada: " +
-        newSeason;
+        novaTemporada;
+
+
+    const temporadaCard =
+        carreiraAtual.querySelectorAll("p")[0];
+
+
+    temporadaCard.textContent =
+        "Temporada: " +
+        novaTemporada;
 
 
     transfersList.innerHTML = "";
@@ -637,70 +822,40 @@ newSeasonButton.addEventListener("click", function() {
     squadList.innerHTML = "";
 
 
-    transfersCount.textContent =
-        "0";
+    totalTransfers = 0;
 
-    salesCount.textContent =
-        "0";
+    totalSales = 0;
 
 
-    transferBalance.textContent =
-        "€0M";
+    atualizarTransferencias();
 
 
-    totalTransfers =
-        0;
+    displayTitles.textContent = "0";
 
-    totalSales =
-        0;
+    displayPoints.textContent = "0";
 
+    displayTopScorer.textContent = "-";
 
-    displayTitles.textContent =
-        "0";
+    displayTopScorerGoals.textContent = "0 gols";
 
-    displayPoints.textContent =
-        "0";
+    displayBestCampaign.textContent = "-";
 
-    displayTopScorer.textContent =
-        "-";
-
-    displayTopScorerGoals.textContent =
-        "0 gols";
-
-    displayBestCampaign.textContent =
-        "-";
-
-    displayHighestPosition.textContent =
-        "-";
+    displayHighestPosition.textContent = "-";
 
 
-    statsTitles.value =
-        "";
+    salvarDadosDaCarreira();
 
-    statsPoints.value =
-        "";
-
-    statsTopScorer.value =
-        "";
-
-    statsTopScorerGoals.value =
-        "";
-
-    statsBestCampaign.value =
-        "";
-
-    statsHighestPosition.value =
-        "";
+    salvarCarreiras();
 
 
-    alert(
-        "Nova temporada iniciada!"
-    );
+    alert("Nova temporada iniciada!");
 
 });
-// ===============================
-// SALVAR E CARREGAR CARREIRAS
-// ===============================
+
+
+// ========================================
+// LOCAL STORAGE
+// ========================================
 
 function salvarCarreiras() {
 
@@ -718,15 +873,18 @@ function carregarCarreiras() {
         localStorage.getItem("carreiras");
 
 
-    if (carreirasSalvas) {
+    if (!carreirasSalvas) {
 
-        careersContainer.innerHTML =
-            carreirasSalvas;
-
-
-        adicionarBotoesDasCarreiras();
+        return;
 
     }
+
+
+    careersContainer.innerHTML =
+        carreirasSalvas;
+
+
+    adicionarBotoesDasCarreiras();
 
 }
 
@@ -739,54 +897,17 @@ function adicionarBotoesDasCarreiras() {
         );
 
 
-    botoesVer.forEach(function(button) {
+    botoesVer.forEach(function (button) {
 
         button.addEventListener(
             "click",
-            function() {
+            function () {
 
-const newSeasonButton =
-    document.getElementById("new-season-button");
-
-const historySection =
-    document.getElementById("history-section");
-
-const historyList =
-    document.getElementById("history-list");
-
-
-                const carreira =
-                    button.parentElement;
-
-
-                const nome =
-                    carreira.querySelector("h3");
-
-                const temporada =
-                    carreira.querySelectorAll("p")[0];
-
-                const tecnico =
-                    carreira.querySelectorAll("p")[1];
-
-
-                careersContainer.style.display =
-                    "none";
-
-                careerDetails.style.display =
-                    "block";
-
-
-                detailsClubName.textContent =
-                    nome.textContent;
-
-                detailsSeason.textContent =
-                    temporada.textContent;
-
-                detailsManager.textContent =
-                    tecnico.textContent;
+                abrirCarreira(
+                    button.parentElement
+                );
 
             }
-
         );
 
     });
@@ -798,28 +919,50 @@ const historyList =
         );
 
 
-    botoesRemover.forEach(function(button) {
+    botoesRemover.forEach(function (button) {
 
         button.addEventListener(
             "click",
-            function() {
+            function () {
 
-                const confirmou =
-                    confirm(
-                        "Tem certeza que deseja remover esta carreira?"
-                    );
+                const card =
+                    button.parentElement;
+
+
+                const nomeClube =
+                    card.querySelector("h3").textContent;
+
+
+                const confirmou = confirm(
+                    "Tem certeza que deseja remover esta carreira?"
+                );
 
 
                 if (confirmou) {
 
-                    button.parentElement.remove();
+                    card.remove();
+
+
+                    localStorage.removeItem(
+                        "dados_" + nomeClube
+                    );
+
+
+                    localStorage.removeItem(
+                        "orcamento_" + nomeClube
+                    );
+
+
+                    localStorage.removeItem(
+                        "titulos_" + nomeClube
+                    );
+
 
                     salvarCarreiras();
 
                 }
 
             }
-
         );
 
     });
@@ -827,311 +970,45 @@ const historyList =
 }
 
 
-// CARREGAR AO ABRIR O SITE
-
-carregarCarreiras();
-
-// ===============================
-// NOVA TEMPORADA
-// ===============================
-
-newSeasonButton.addEventListener("click", function() {
-
-    const confirmou =
-        confirm(
-            "Deseja encerrar esta temporada e começar uma nova?"
-        );
-
-
-    if (!confirmou) {
-        return;
-    }
-
-
-    // CRIA O CARD DA TEMPORADA ENCERRADA
-
-    const oldSeason =
-        document.createElement("div");
-
-    oldSeason.classList.add(
-        "history-card"
-    );
-
-
-    const seasonTitle =
-        document.createElement("h3");
-
-    seasonTitle.textContent =
-        detailsSeason.textContent;
-
-
-    const titles =
-        document.createElement("p");
-
-    titles.textContent =
-        "🏆 Títulos: " +
-        displayTitles.textContent;
-
-
-    const points =
-        document.createElement("p");
-
-    points.textContent =
-        "📊 Pontos: " +
-        displayPoints.textContent;
-
-
-    const scorer =
-        document.createElement("p");
-
-    scorer.textContent =
-        "⚽ Artilheiro: " +
-        displayTopScorer.textContent +
-        " - " +
-        displayTopScorerGoals.textContent;
-
-
-    const campaign =
-        document.createElement("p");
-
-    campaign.textContent =
-        "📈 Melhor campanha: " +
-        displayBestCampaign.textContent;
-
-
-    const position =
-        document.createElement("p");
-
-    position.textContent =
-        "🥇 Melhor posição: " +
-        displayHighestPosition.textContent;
-
-
-    oldSeason.appendChild(
-        seasonTitle
-    );
-
-    oldSeason.appendChild(
-        titles
-    );
-
-    oldSeason.appendChild(
-        points
-    );
-
-    oldSeason.appendChild(
-        scorer
-    );
-
-    oldSeason.appendChild(
-        campaign
-    );
-
-    oldSeason.appendChild(
-        position
-    );
-
-
-    historyList.appendChild(
-        oldSeason
-    );
-
-
-    // AVANÇA A TEMPORADA
-
-    const temporadaAtual =
-        detailsSeason.textContent
-            .replace("Temporada: ", "");
-
-
-    const partes =
-        temporadaAtual.split("/");
-
-
-    if (partes.length === 2) {
-
-        const anoInicial =
-            Number(partes[0]);
-
-        const anoFinal =
-            Number(partes[1]);
-
-
-        const novaTemporada =
-            (anoInicial + 1) +
-            "/" +
-            (anoFinal + 1);
-
-
-        detailsSeason.textContent =
-            "Temporada: " +
-            novaTemporada;
-
-    }
-
-
-    // ZERA CONTRATAÇÕES
-
-    transfersList.innerHTML =
-        "";
-
-    transfersCount.textContent =
-        "0";
-
-
-    // ZERA VENDAS
-
-    salesList.innerHTML =
-        "";
-
-    salesCount.textContent =
-        "0";
-
-
-    // ZERA VALORES DE TRANSFERÊNCIA
-
-    totalTransfers =
-        0;
-
-    totalSales =
-        0;
-let carreiraAtual = null;
-
-    transferBalance.textContent =
-        "€0M";
-
-
-    // ZERA ELENCO
-
-    squadList.innerHTML =
-        "";
-
-
-    // ZERA ESTATÍSTICAS
-
-    displayTitles.textContent =
-        "0";
-
-    displayPoints.textContent =
-        "0";
-
-    displayTopScorer.textContent =
-        "-";
-
-    displayTopScorerGoals.textContent =
-        "0 gols";
-
-    displayBestCampaign.textContent =
-        "-";
-
-    displayHighestPosition.textContent =
-        "-";
-
-
-    // SALVA O HISTÓRICO
-
-    salvarHistorico();
-
-});
-
-// ===============================
-// SALVAR HISTÓRICO
-// ===============================
-
-function salvarHistorico() {
-
-    localStorage.setItem(
-        "historicoTemporadas",
-        historyList.innerHTML
-    );
-
-}
-
-
-function carregarHistorico() {
-
-    const historicoSalvo =
-        localStorage.getItem(
-            "historicoTemporadas"
-        );
-
-
-    if (historicoSalvo) {
-
-        historyList.innerHTML =
-            historicoSalvo;
-
-    }
-
-}
-
-
-salvarCarreiras();
-function salvarCarreira() {
+// ========================================
+// SALVAR DADOS
+// ========================================
+
+function salvarDadosDaCarreira() {
 
     if (!carreiraAtual) {
+
         return;
+
     }
 
-    carreiraAtual.temporada =
-        detailsSeason.textContent;
 
-    carreiraAtual.contratacoes =
-        transfersList.innerHTML;
+    const nomeClube =
+        detailsClubName.textContent;
 
-    carreiraAtual.vendas =
-        salesList.innerHTML;
 
-    carreiraAtual.elenco =
-        squadList.innerHTML;
+    const dados = {
 
-    carreiraAtual.titulos =
-        displayTitles.textContent;
+        temporada:
+            detailsSeason.textContent,
 
-    carreiraAtual.pontos =
-        displayPoints.textContent;
+        orcamento:
+            initialBudget,
 
-    carreiraAtual.artilheiro =
-        displayTopScorer.textContent;
+        transferencias:
+            transfersList.innerHTML,
 
-    carreiraAtual.golsArtilheiro =
-        displayTopScorerGoals.textContent;
+        vendas:
+            salesList.innerHTML,
 
-    carreiraAtual.melhorCampanha =
-        displayBestCampaign.textContent;
+        elenco:
+            squadList.innerHTML,
 
-    carreiraAtual.melhorPosicao =
-        displayHighestPosition.textContent;
+        totalTransferencias:
+            totalTransfers,
 
-    localStorage.setItem(
-        "carreiraAtual",
-        JSON.stringify(carreiraAtual)
-    );
-
-}function salvarDadosDaCarreira() {
-
-    const dadosDaCarreira = {
-
-        temporada: detailsSeason.textContent,
-
-        transferencias: transfersList.innerHTML,
-
-        vendas: salesList.innerHTML,
-
-        elenco: squadList.innerHTML,
-
-        totalTransferencias: totalTransfers,
-
-        totalVendas: totalSales,
-
-        quantidadeTransferencias:
-            transfersCount.textContent,
-
-        quantidadeVendas:
-            salesCount.textContent,
-
-        saldoTransferencias:
-            transferBalance.textContent,
+        totalVendas:
+            totalSales,
 
         titulos:
             displayTitles.textContent,
@@ -1149,90 +1026,157 @@ function salvarCarreira() {
             displayBestCampaign.textContent,
 
         melhorPosicao:
-            displayHighestPosition.textContent
+            displayHighestPosition.textContent,
+
+        historico:
+            historyList.innerHTML
 
     };
 
 
     localStorage.setItem(
-        "dadosDaCarreira",
-        JSON.stringify(dadosDaCarreira)
+        "dados_" + nomeClube,
+        JSON.stringify(dados)
     );
 
 }
+
+
+// ========================================
+// CARREGAR DADOS
+// ========================================
+
 function carregarDadosDaCarreira() {
 
+    const nomeClube =
+        detailsClubName.textContent;
+
+
     const dadosSalvos =
-        localStorage.getItem("dadosDaCarreira");
+        localStorage.getItem(
+            "dados_" + nomeClube
+        );
 
 
-    if (!dadosSalvos) {
-        return;
+    const orcamentoSalvo =
+        localStorage.getItem(
+            "orcamento_" + nomeClube
+        );
+
+
+    if (dadosSalvos) {
+
+        const dados =
+            JSON.parse(dadosSalvos);
+
+
+        detailsSeason.textContent =
+            dados.temporada;
+
+
+        initialBudget =
+            Number(dados.orcamento) || 0;
+
+
+        transfersList.innerHTML =
+            dados.transferencias || "";
+
+
+        salesList.innerHTML =
+            dados.vendas || "";
+
+
+        squadList.innerHTML =
+            dados.elenco || "";
+
+
+        totalTransfers =
+            Number(dados.totalTransferencias) || 0;
+
+
+        totalSales =
+            Number(dados.totalVendas) || 0;
+
+
+        displayTitles.textContent =
+            dados.titulos || "0";
+
+
+        displayPoints.textContent =
+            dados.pontos || "0";
+
+
+        displayTopScorer.textContent =
+            dados.artilheiro || "-";
+
+
+        displayTopScorerGoals.textContent =
+            dados.golsArtilheiro || "0 gols";
+
+
+        displayBestCampaign.textContent =
+            dados.melhorCampanha || "-";
+
+
+        displayHighestPosition.textContent =
+            dados.melhorPosicao || "-";
+
+
+        historyList.innerHTML =
+            dados.historico || "";
+
     }
 
 
-    const dados =
-        JSON.parse(dadosSalvos);
+    else {
+
+        initialBudget =
+            Number(orcamentoSalvo) || 0;
 
 
-    detailsSeason.textContent =
-        dados.temporada;
+        totalTransfers = 0;
+
+        totalSales = 0;
 
 
-    transfersList.innerHTML =
-        dados.transferencias;
+        displayTitles.textContent =
+            localStorage.getItem(
+                "titulos_" + nomeClube
+            ) || "0";
 
 
-    salesList.innerHTML =
-        dados.vendas;
+        displayPoints.textContent = "0";
+
+        displayTopScorer.textContent = "-";
+
+        displayTopScorerGoals.textContent = "0 gols";
+
+        displayBestCampaign.textContent = "-";
+
+        displayHighestPosition.textContent = "-";
 
 
-    squadList.innerHTML =
-        dados.elenco;
+        transfersList.innerHTML = "";
+
+        salesList.innerHTML = "";
+
+        squadList.innerHTML = "";
+
+        historyList.innerHTML = "";
+
+    }
 
 
-    totalTransfers =
-        dados.totalTransferencias;
+    historySection.style.display = "none";
 
 
-    totalSales =
-        dados.totalVendas;
-
-
-    transfersCount.textContent =
-        dados.quantidadeTransferencias;
-
-
-    salesCount.textContent =
-        dados.quantidadeVendas;
-
-
-    transferBalance.textContent =
-        dados.saldoTransferencias;
-
-
-    displayTitles.textContent =
-        dados.titulos;
-
-
-    displayPoints.textContent =
-        dados.pontos;
-
-
-    displayTopScorer.textContent =
-        dados.artilheiro;
-
-
-    displayTopScorerGoals.textContent =
-        dados.golsArtilheiro;
-
-
-    displayBestCampaign.textContent =
-        dados.melhorCampanha;
-
-
-    displayHighestPosition.textContent =
-        dados.melhorPosicao;
+    atualizarTransferencias();
 
 }
-carregarDadosDaCarreira();
+
+
+// ========================================
+// INICIAR
+// ========================================
+
+carregarCarreiras();

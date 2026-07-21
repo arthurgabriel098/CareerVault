@@ -295,3 +295,6 @@ outline: none;
 .history-card p {
     margin: 8px 0;
 }
+#history-section {
+    display: none;
+}
