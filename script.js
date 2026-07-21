@@ -705,21 +705,32 @@ saveStatsButton.addEventListener("click", function () {
 newSeasonButton.addEventListener("click", function () {
 
     if (!carreiraAtual) {
-
         return;
-
     }
-
 
     const confirmou = confirm(
         "Deseja encerrar esta temporada e começar uma nova?"
     );
 
-
     if (!confirmou) {
+        return;
+    }
+
+    const novoOrcamento = prompt(
+        "Digite o novo orçamento para a próxima temporada em milhões de euros:"
+    );
+
+    if (novoOrcamento === null) {
+        return;
+    }
+
+    const orçamentoNumerico = Number(novoOrcamento);
+
+    if (isNaN(orçamentoNumerico) || orçamentoNumerico < 0) {
+
+        alert("Digite um valor válido para o orçamento.");
 
         return;
-
     }
 
 
@@ -730,7 +741,8 @@ newSeasonButton.addEventListener("click", function () {
         );
 
 
-    const partes = temporadaAtual.split("/");
+    const partes =
+        temporadaAtual.split("/");
 
 
     if (partes.length !== 2) {
@@ -742,9 +754,12 @@ newSeasonButton.addEventListener("click", function () {
     }
 
 
-    const anoInicial = Number(partes[0]);
+    const anoInicial =
+        Number(partes[0]);
 
-    const anoFinal = Number(partes[1]);
+
+    const anoFinal =
+        Number(partes[1]);
 
 
     if (
@@ -759,9 +774,12 @@ newSeasonButton.addEventListener("click", function () {
     }
 
 
-    const oldSeason = document.createElement("div");
+    const oldSeason =
+        document.createElement("div");
 
-    oldSeason.className = "history-card";
+
+    oldSeason.className =
+        "history-card";
 
 
     oldSeason.innerHTML =
@@ -815,6 +833,7 @@ newSeasonButton.addEventListener("click", function () {
         novaTemporada;
 
 
+    // ZERA AS CONTRATAÇÕES E VENDAS
     transfersList.innerHTML = "";
 
     salesList.innerHTML = "";
@@ -827,9 +846,15 @@ newSeasonButton.addEventListener("click", function () {
     totalSales = 0;
 
 
+    // DEFINE O NOVO ORÇAMENTO
+    initialBudget = orçamentoNumerico;
+
+
+    // ATUALIZA O SALDO
     atualizarTransferencias();
 
 
+    // ZERA AS ESTATÍSTICAS DA NOVA TEMPORADA
     displayTitles.textContent = "0";
 
     displayPoints.textContent = "0";
@@ -843,17 +868,32 @@ newSeasonButton.addEventListener("click", function () {
     displayHighestPosition.textContent = "-";
 
 
+    // SALVA O NOVO ORÇAMENTO
+    const nomeClube =
+        detailsClubName.textContent;
+
+
+    localStorage.setItem(
+        "orcamento_" + nomeClube,
+        orçamentoNumerico
+    );
+
+
     salvarDadosDaCarreira();
 
     salvarCarreiras();
 
 
-    alert("Nova temporada iniciada!");
+    alert(
+        "Nova temporada iniciada!\n\n" +
+        "Novo orçamento: €" +
+        orçamentoNumerico +
+        "M"
+    );
 
 });
 
 
-// ========================================
 // LOCAL STORAGE
 // ========================================
 
