@@ -243,7 +243,9 @@ salvarCarreiras();
 // VOLTAR
 
 backButton.addEventListener("click", function() {
-salvarCarreira();
+  salvarDadosDaCarreira();
+
+
     careerDetails.style.display =
         "none";
 
@@ -1105,5 +1107,131 @@ function salvarCarreira() {
         "carreiraAtual",
         JSON.stringify(carreiraAtual)
     );
+
+}function salvarDadosDaCarreira() {
+
+    const dadosDaCarreira = {
+
+        temporada: detailsSeason.textContent,
+
+        transferencias: transfersList.innerHTML,
+
+        vendas: salesList.innerHTML,
+
+        elenco: squadList.innerHTML,
+
+        totalTransferencias: totalTransfers,
+
+        totalVendas: totalSales,
+
+        quantidadeTransferencias:
+            transfersCount.textContent,
+
+        quantidadeVendas:
+            salesCount.textContent,
+
+        saldoTransferencias:
+            transferBalance.textContent,
+
+        titulos:
+            displayTitles.textContent,
+
+        pontos:
+            displayPoints.textContent,
+
+        artilheiro:
+            displayTopScorer.textContent,
+
+        golsArtilheiro:
+            displayTopScorerGoals.textContent,
+
+        melhorCampanha:
+            displayBestCampaign.textContent,
+
+        melhorPosicao:
+            displayHighestPosition.textContent
+
+    };
+
+
+    localStorage.setItem(
+        "dadosDaCarreira",
+        JSON.stringify(dadosDaCarreira)
+    );
+
+}
+function carregarDadosDaCarreira() {
+
+    const dadosSalvos =
+        localStorage.getItem("dadosDaCarreira");
+
+
+    if (!dadosSalvos) {
+        return;
+    }
+
+
+    const dados =
+        JSON.parse(dadosSalvos);
+
+
+    detailsSeason.textContent =
+        dados.temporada;
+
+
+    transfersList.innerHTML =
+        dados.transferencias;
+
+
+    salesList.innerHTML =
+        dados.vendas;
+
+
+    squadList.innerHTML =
+        dados.elenco;
+
+
+    totalTransfers =
+        dados.totalTransferencias;
+
+
+    totalSales =
+        dados.totalVendas;
+
+
+    transfersCount.textContent =
+        dados.quantidadeTransferencias;
+
+
+    salesCount.textContent =
+        dados.quantidadeVendas;
+
+
+    transferBalance.textContent =
+        dados.saldoTransferencias;
+
+
+    displayTitles.textContent =
+        dados.titulos;
+
+
+    displayPoints.textContent =
+        dados.pontos;
+
+
+    displayTopScorer.textContent =
+        dados.artilheiro;
+
+
+    displayTopScorerGoals.textContent =
+        dados.golsArtilheiro;
+
+
+    displayBestCampaign.textContent =
+        dados.melhorCampanha;
+
+
+    displayHighestPosition.textContent =
+        dados.melhorPosicao;
 
 }
