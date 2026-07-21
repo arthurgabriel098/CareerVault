@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Career Vault 26</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>FC 26 Career Hub</h1>
+
+        <button id="new-career-button">
+            Nova Carreira
+
+<button class="remove-career-button">
+    Remover
+</button>
+
+        </button>
+
+    </header>
+
+    <main>
+
+        <div id="career-form" class="career-form">
+
+            <h2>Nova Carreira</h2>
+
+            <input id="club-name" type="text" placeholder="Nome do Clube">
+
+            <input id="season" type="text" placeholder="Temporada">
+
+            <input id="manager" type="text" placeholder="Técnico">
+
+            <input id="country" type="text" placeholder="País">
+
+            <input id="titles" type="number" placeholder="Títulos">
+
+            <input id="budget" type="text" placeholder="Orçamento">
+
+            <input id="club-logo" type="text" placeholder="URL do escudo">
+
+            <button id="create-career-button">
+                Criar Carreira
+            </button>
+
+        </div>
+
+
+        <section id="careers-container" class="careers-container">
+
+
+        </section>
+
+
+        <section id="career-details" class="career-details">
+
+<div id="history-section" class="career-section">
+
+    <h2>Histórico de Temporadas</h2>
+
+    <div id="history-list" class="history-list"></div>
+
+</div>
+    <div id="history-list" class="history-list"></div>
+
+</div>
+            <button id="back-button">
+                ← Voltar
+            </button>
+
+
+            <h2 id="details-club-name"></h2>
+
+            <p id="details-season"></p>
+
+            <p id="details-manager"></p>
+
+
+            <div class="career-menu">
+
+                <button id="overview-button">
+                    Visão Geral
+                </button>
+
+                <button id="transfers-button">
+                    Contratações
+                </button>
+
+                <button id="sales-button">
+                    Vendas
+                </button>
+
+                <button id="squad-button">
+                    Elenco
+                </button>
+
+                <button id="stats-button">
+                    Estatísticas
+                </button>
+ 
+<button id="new-season-button">
+    Nova Temporada
+</button>
+
+
+            </div>
+
+
+            <div id="transfers-section" class="career-section">
+
+                <h2>Contratações</h2>
+
+                <div class="transfer-form">
+
+                    <input
+                        id="player-name"
+                        type="text"
+                        placeholder="Nome do jogador"
+                    >
+
+                    <input
+                        id="player-position"
+                        type="text"
+                        placeholder="Posição"
+                    >
+
+                    <input
+                        id="previous-club"
+                        type="text"
+                        placeholder="Clube anterior"
+                    >
+
+                    <input
+                        id="transfer-value"
+                        type="number"
+                        placeholder="Valor em milhões (€M)"
+                    >
+
+                    <button id="add-transfer-button">
+                        Adicionar Contratação
+                    </button>
+
+                </div>
+
+                <div
+                    id="transfers-list"
+                    class="transfers-list"
+                ></div>
+
+            </div>
+
+
+            <div id="sales-section" class="career-section">
+
+                <h2>Vendas</h2>
+
+                <div class="transfer-form">
+
+                    <input
+                        id="sold-player-name"
+                        type="text"
+                        placeholder="Nome do jogador"
+                    >
+
+                    <input
+                        id="sold-player-position"
+                        type="text"
+                        placeholder="Posição"
+                    >
+
+                    <input
+                        id="new-club"
+                        type="text"
+                        placeholder="Novo clube"
+                    >
+
+                    <input
+                        id="sale-value"
+                        type="number"
+                        placeholder="Valor em milhões (€M)"
+                    >
+
+                    <button id="add-sale-button">
+                        Adicionar Venda
+                    </button>
+
+                </div>
+
+                <div
+                    id="sales-list"
+                    class="transfers-list"
+                ></div>
+
+            </div>
+
+
+            <div id="overview-section" class="career-section">
+
+                <h2>Visão Geral</h2>
+
+                <div class="overview-cards">
+
+                    <div class="overview-card">
+
+                        <h3>Contratações</h3>
+
+                        <strong id="transfers-count">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="overview-card">
+
+                        <h3>Vendas</h3>
+
+                        <strong id="sales-count">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="overview-card">
+
+                        <h3>Saldo de Transferências</h3>
+
+                        <strong id="transfer-balance">
+                            €0M
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div id="squad-section" class="career-section">
+
+                <h2>Elenco</h2>
+
+                <div class="squad-form">
+
+                    <input
+                        id="squad-player-name"
+                        type="text"
+                        placeholder="Nome do jogador"
+                    >
+
+                    <input
+                        id="squad-player-position"
+                        type="text"
+                        placeholder="Posição"
+                    >
+
+                    <input
+                        id="squad-player-number"
+                        type="number"
+                        placeholder="Número da camisa"
+                    >
+
+                    <input
+                        id="squad-player-overall"
+                        type="number"
+                        placeholder="Overall"
+                    >
+
+                    <button id="add-squad-player-button">
+                        Adicionar Jogador
+                    </button>
+
+                </div>
+
+                <div
+                    id="squad-list"
+                    class="squad-list"
+                ></div>
+
+            </div>
+
+
+            <div id="stats-section" class="career-section">
+
+                <h2>Estatísticas da Carreira</h2>
+
+
+                <div class="stats-form">
+
+                    <input
+                        id="stats-titles"
+                        type="number"
+                        placeholder="Títulos conquistados"
+                    >
+
+                    <input
+                        id="stats-points"
+                        type="number"
+                        placeholder="Pontos na liga"
+                    >
+
+                    <input
+                        id="stats-top-scorer"
+                        type="text"
+                        placeholder="Artilheiro da temporada"
+                    >
+
+                    <input
+                        id="stats-top-scorer-goals"
+                        type="number"
+                        placeholder="Gols do artilheiro"
+                    >
+
+                    <input
+                        id="stats-best-campaign"
+                        type="text"
+                        placeholder="Melhor campanha"
+                    >
+
+                    <input
+                        id="stats-highest-position"
+                        type="text"
+                        placeholder="Melhor posição na liga"
+                    >
+
+                    <button id="save-stats-button">
+                        Salvar Estatísticas
+                    </button>
+
+                </div>
+
+
+                <div class="stats-cards">
+
+                    <div class="stats-card">
+
+                        <h3>Títulos</h3>
+
+                        <strong id="display-titles">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stats-card">
+
+                        <h3>Pontos</h3>
+
+                        <strong id="display-points">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stats-card">
+
+                        <h3>Artilheiro</h3>
+
+                        <strong id="display-top-scorer">
+                            -
+                        </strong>
+
+                        <p id="display-top-scorer-goals">
+                            0 gols
+                        </p>
+
+                    </div>
+
+
+                    <div class="stats-card">
+
+                        <h3>Melhor Campanha</h3>
+
+                        <strong id="display-best-campaign">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stats-card">
+
+                        <h3>Melhor Posição</h3>
+
+                        <strong id="display-highest-position">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
