@@ -1235,3 +1235,4 @@ function carregarDadosDaCarreira() {
         dados.melhorPosicao;
 
 }
+carregarDadosDaCarreira();
