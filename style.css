@@ -1,92 +1,121 @@
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-}
+
 body {
-background-color: #111;
-color: white;
-font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
 }
+
+
 header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 25px 40px;
-border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;
+    border-bottom: 1px solid #2a2a2a;
 }
+
+
 button {
-background-color: white;
-color: #111;
-border: none;
-padding: 12px 18px;
-border-radius: 8px;
-font-size: 14px;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
+    background-color: white;
+    color: #111;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
+
 
 button:hover {
-transform: translateY(-3px);
+    transform: translateY(-3px);
 }
+
 
 main {
-padding: 40px;
+    padding: 40px;
 }
+
 
 h2 {
-margin-bottom: 25px;
-font-size: 28px;
+    margin-bottom: 25px;
+    font-size: 28px;
 }
+
+
 .careers-container {
-display: grid;
-grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+    gap: 20px;
 }
-.career-card
-{
-background-color: #1a1a1a;
-border: 1px solid #2a2a2a;
-border-radius: 14px;
-padding: 24px;
 
 
+.career-card {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 24px;
 }
+
+
 .career-form {
-background-color: #1a1a1a;
-border: 1px solid #2a2a2a;
-border-radius: 14px;
-padding: 25px;
-margin-bottom: 30px;
-display: flex;
-gap: 15px;
-display: none;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 30px;
+    display: none;
     flex-direction: column;
+    gap: 15px;
 }
-.career-form input {
-background-color: #111;
-color: white;
-border: 1px solis #333;
-border-radius: 8px;
-padding: 12px;
-font-size: 15px;
-outline: none;
+
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+    gap: 12px;
 }
-.career-form input:focus {
+
+
+.career-form input,
+.career-form select {
+    background-color: #111;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 15px;
+    outline: none;
+}
+
+
+.career-form input:focus,
+.career-form select:focus {
     border-color: white;
 }
 
-.career-form {
-    display: none;
-}
-.club-logo {
+
+.career-logo {
     width: 80px;
     height: 80px;
     object-fit: contain;
     margin-bottom: 15px;
 }
+
+
 .career-details {
     display: none;
     background-color: #1a1a1a;
@@ -95,10 +124,12 @@ outline: none;
     padding: 30px;
 }
 
+
 .career-details h2 {
     margin-top: 25px;
     margin-bottom: 10px;
 }
+
 
 .career-menu {
     display: flex;
@@ -107,22 +138,35 @@ outline: none;
     flex-wrap: wrap;
 }
 
+
 .career-menu button {
     background-color: #2a2a2a;
     color: white;
 }
+
+
 .career-section {
-    margin-top: 30px;
+    margin-top: 40px;
+    padding: 25px;
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
 }
 
-.transfer-form {
+
+.transfer-form,
+.squad-form,
+.stats-form {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 25px;
 }
 
-.transfer-form input {
+
+.transfer-form input,
+.squad-form input,
+.stats-form input {
     background-color: #111;
     color: white;
     border: 1px solid #333;
@@ -131,6 +175,7 @@ outline: none;
     flex: 1;
     min-width: 180px;
 }
+
 
 .transfer-card {
     background-color: #111;
@@ -140,27 +185,28 @@ outline: none;
     margin-bottom: 12px;
 }
 
+
 .transfer-card h3 {
     margin-bottom: 8px;
 }
+
 
 .transfer-card p {
     color: #aaa;
     margin-bottom: 5px;
 }
-.career-section {
-    margin-top: 40px;
-    padding: 25px;
-    background-color: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 14px;
-}
+
+
 .overview-cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
     gap: 20px;
     margin-top: 20px;
 }
+
 
 .overview-card {
     background-color: #111;
@@ -169,36 +215,27 @@ outline: none;
     padding: 25px;
 }
 
+
 .overview-card h3 {
     margin-bottom: 15px;
     color: #aaa;
 }
 
+
 .overview-card strong {
     font-size: 32px;
 }
-.squad-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
-}
 
-.squad-form input {
-    background-color: #111;
-    color: white;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 12px;
-    flex: 1;
-    min-width: 180px;
-}
 
 .squad-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(250px, 1fr)
+    );
     gap: 15px;
 }
+
 
 .squad-card {
     background-color: #111;
@@ -207,38 +244,27 @@ outline: none;
     padding: 20px;
 }
 
+
 .squad-card h3 {
     margin-bottom: 10px;
 }
+
 
 .squad-card p {
     color: #aaa;
     margin-bottom: 6px;
 }
-/* ESTATÍSTICAS DA CARREIRA */
 
-.stats-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
-}
-
-.stats-form input {
-    background-color: #111;
-    color: white;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 12px;
-    flex: 1;
-    min-width: 200px;
-}
 
 .stats-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    );
     gap: 20px;
 }
+
 
 .stats-card {
     background-color: #111;
@@ -247,19 +273,24 @@ outline: none;
     padding: 25px;
 }
 
+
 .stats-card h3 {
     color: #aaa;
     margin-bottom: 15px;
 }
 
+
 .stats-card strong {
     font-size: 28px;
 }
+
 
 .stats-card p {
     color: #aaa;
     margin-top: 8px;
 }
+
+
 .remove-career-button {
     background-color: #c62828;
     color: white;
@@ -270,15 +301,18 @@ outline: none;
     margin-top: 8px;
 }
 
+
 .remove-career-button:hover {
     background-color: #9b1c1c;
 }
+
 
 .history-list {
     display: grid;
     gap: 20px;
     margin-top: 20px;
 }
+
 
 .history-card {
     background: #181818;
@@ -287,14 +321,18 @@ outline: none;
     padding: 20px;
 }
 
+
 .history-card h3 {
     margin-bottom: 15px;
     font-size: 22px;
 }
 
+
 .history-card p {
     margin: 8px 0;
 }
+
+
 #history-section {
     display: none;
 }
