@@ -3,7 +3,7 @@
 // PARTE 1/3
 // ALEMANHA + INGLATERRA + ITÁLIA
 // ========================================
-console.log("CLUBS.JS FOI CARREGADO");
+
 
 function criarClube(nome, logo = "") {
 
@@ -1610,5 +1610,6 @@ const footballDatabase = {
 
 }
 
-};
-console.log("FOOTBALL DATABASE FOI CRIADO");
+};if (typeof module !== "undefined") {
+    module.exports = footballDatabase;
+}
